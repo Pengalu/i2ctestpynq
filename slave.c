@@ -3,8 +3,7 @@
 void replaceElement(float values[], int i, float v){
     values[i] = v;}
 
-float v, ME, rv;
-int idx, ri;
+int idx, ri, v, ME, rv;
 
 int main(void) {
     const uint32_t my_slave_address = 0x70;
@@ -24,7 +23,7 @@ int main(void) {
             scanf("%d", &ri);
             if (ri >= 0 && ri <32){
                 printf("Replace (value): ");
-                scanf(" %f", &rv);
+                scanf(" %d", &rv);
                 replaceElement(my_register_map, ri, rv);
                 break;
             }
