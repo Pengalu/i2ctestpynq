@@ -3,6 +3,9 @@
 void replaceElement(float values[], int i, float v){
     values[i] = v;}
 
+float v, ME, rv;
+int idx, ri;
+
 int main(void) {
     const uint32_t my_slave_address = 0x70;
         // This array contains 32 registers that can be written & read by the master board. The slave can also modify the values of the registers.
@@ -17,7 +20,17 @@ int main(void) {
     
     while (1){ // Slave mode handler needs to run constantly until program is annihilated 
         iic_slave_mode_handler(IIC0); // This high level function handles sendind data on the SDA lines
-        // Our turn (whatever the slave needs to do)
+        printf("Replace (index): ");
+            scanf("%d", &ri);
+            if (ri >= 0 && ri <32){
+                printf("Replace (value): ");
+                scanf(" %f", &rv);
+                replaceElement(my_register_map, ri, rv);
+                break;
+            }
+            else {
+                printf("Error: index exceeds bound of array.\n");
+            }
         sleep_msec(10); // Execute slave mode handler literally constantly 
     }
     iic_destroy(IIC0);
